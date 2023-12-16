@@ -5,7 +5,7 @@
 
 __myproject>sittengs.py__
 ![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/eda99fa0-2105-4608-8452-efb2b1c934c5)
-![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/001bc60c-e650-4e78-a417-d783faa842d0)
+![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/73ee8f9e-2e71-46d3-ba8b-de58a78ed4fe)
 ![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/a2c6528f-f300-4a0c-8a48-624c315b1fc8)
 
 __myproject>urls.py__
