@@ -1,0 +1,2 @@
+# Django-paignator
+django-paignator
