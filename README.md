@@ -21,7 +21,7 @@ Keyinchalik, funksiyaga asoslangan ko'rinishlarda sahifalash bilan qanday ishlas
 >            object_list = Employee.objects.all()
 >            page_num = request.GET.get('page', 1)
 >            paginator = Paginator(object_list, 6) # 6 employees per page
->
+> 
 >            try:
 >               page_obj = paginator.page(page_num)
 >            except PageNotAnInteger:
