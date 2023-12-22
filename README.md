@@ -1,8 +1,68 @@
 # Django-paignator
 
-
+### Asasiy tushinchalar
+* count- ob'ektlarning umumiy soni
+* num_pages- sahifalarning umumiy soni
+* page_range- sahifa raqamlari diapazoni iteratori
+* number- berilgan sahifa uchun sahifa raqamini ko'rsatadi
+* paginator- bog'langan Paginatorob'ektni ko'rsatadi
+* has_next()- Trueagar keyingi sahifa mavjud bo'lsa, qaytadi
+* has_previous()- - Trueoldingi sahifa mavjud bo'lsa, qaytaradi
+* next_page_number()- keyingi sahifaning raqamini qaytaradi
+* previous_page_number()- oldingi sahifaning raqamini qaytaradi
 ![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/32edc9f2-8243-4a09-baa9-a1dcbd2c524a)
+__Funktsiyaga asoslangan ko'rinishlar__
+Keyinchalik, funksiyaga asoslangan ko'rinishlarda sahifalash bilan qanday ishlashni ko'rib chiqamiz:
+>         from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+>         from django.shortcuts import render
+>         from . models import Employee
+>
+>         def index(request):
+>            object_list = Employee.objects.all()
+>            page_num = request.GET.get('page', 1)
+>            paginator = Paginator(object_list, 6) # 6 employees per page
+>
+>            try:
+>               page_obj = paginator.page(page_num)
+>            except PageNotAnInteger:
+>               page_obj = paginator.page(1)
+>            except EmptyPage:
+>               page_obj = paginator.page(paginator.num_pages)
+>
+>            return render(request, 'index.html', {'page_obj': page_obj})
 
+1- page_num URL manzilidan oʻzgaruvchi aniqlandi .
+2- Paginator Sinfni unga kerakli parametrlar, employeesQuerySet va har bir sahifaga kiritilishi kerak bo'lgan xodimlar sonini o'tkazgan holda yaratdi .
+3- page_obj Oldingi va keyingi sahifalarga o'tish uchun metama'lumotlar bilan birga sahifalangan xodimlar ma'lumotlarini o'z ichiga olgan sahifa ob'ekti yaratildi .
+
+__paginotor ko'rinish__
+>           {% if page_obj.has_previous %}
+>               <a href="?page={{ page_obj.previous_page_number }}">« Previous page</a>
+>              {% if page_obj.number > 3 %}
+>                   <a href="?page=1">1</a>
+>              {% endif %}
+>              {% if page_obj.number > 4 %}
+>                   <span>...</span>
+>              {% endif %}
+>           {% endif %}
+>
+>           {% for num in page_obj.paginator.page_range %}
+>             {% if page_obj.number == num %}
+>                <a href="?page={{ num }}">{{ num }}</a>
+>             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+>                <a href="?page={{ num }}">{{ num }}</a>
+>             {% endif %}
+>          {% endfor %}
+>
+>          {% if page_obj.has_next %}
+>            {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+>            <span>...</span>
+>             <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+ >        {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+>            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+>         {% endif %}
+>         <a href="?page={{ page_obj.next_page_number }}">Next Page »</a>
+>         {% endif %}
 __myproject>sittengs.py__
 ![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/eda99fa0-2105-4608-8452-efb2b1c934c5)
 ![image](https://github.com/AsadbekNurmamatov2002/Django-paignator/assets/144318530/73ee8f9e-2e71-46d3-ba8b-de58a78ed4fe)
